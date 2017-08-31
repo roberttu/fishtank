@@ -8,21 +8,28 @@ relay1pin = 21
 relay2pin = 20
 relay3pin = 16
 
-print relay2pin
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(relay2pin,GPIO.OUT,initial=GPIO.HIGH)
-#GPIO.setup(relay3pin,GPIO.OUT,initial=GPIO.HIGH)
-#GPIO.setup(relay3pin,GPIO.IN)
-GPIO.setup(relay1pin,GPIO.OUT,initial=GPIO.HIGH)
-GPIO.output(relay1pin,GPIO.LOW)
-GPIO.output(relay2pin,GPIO.HIGH)
-#print GPIO.input(relay2pin)
-#print GPIO.input(relay3pin)
-#print GPIO.input(27)
+def writerelay(relay,state):
+	GPIO.setmode(GPIO.BCM)
+#	GPIO.setup(relay2pin,GPIO.OUT,initial=GPIO.HIGH)
+	#GPIO.setup(relay3pin,GPIO.OUT,initial=GPIO.HIGH)
+	#GPIO.setup(relay3pin,GPIO.IN)
+	GPIO.setup(relay,GPIO.OUT,initial=GPIO.HIGH)
+	GPIO.output(relay,state)
+#	GPIO.output(relay,GPIO.HIGH)
+	#print GPIO.input(relay2pin)
+	#print GPIO.input(relay3pin)
+	#print GPIO.input(27)
 
-sleep(2)
-GPIO.output(relay1pin,GPIO.HIGH)
-GPIO.output(relay2pin,GPIO.LOW)
-sleep(2)
-GPIO.output(relay2pin,GPIO.HIGH)
-GPIO.cleanup()
+#	sleep(2)
+#	GPIO.output(relay1pin,GPIO.HIGH)
+#	GPIO.output(relay2pin,GPIO.LOW)
+#	sleep(2)
+#	GPIO.output(relay2pin,GPIO.HIGH)
+	GPIO.cleanup()
+
+if __name__=="__main__":
+  if len(argv) < 3:
+     exit(1)
+  else:
+    writerelay(argv[1],argv[2]) 
+  
